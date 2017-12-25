@@ -35,7 +35,7 @@ open class HProgregressHUD: NSView {
     
     open func showAnimated(_: Bool)  {
         alphaValue = 1.0
-        backgroundView.alphaValue = 0.5
+        backgroundView.alphaValue = 0.1
     }
     
     open func hideAnimated(_: Bool)  {
@@ -51,7 +51,7 @@ open class HProgregressHUD: NSView {
     
     open let backgroundView: HBackgroundView = HBackgroundView()
     
-    open let bezelView: HBackgroundView = HBackgroundView()
+    open let bezelView = NSVisualEffectView()
     
     
     open let label: NSTextField = createLabel()
@@ -110,12 +110,16 @@ extension HProgregressHUD {
         
         //backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
         backgroundView.autoresizingMask = [.width, .height]
-        backgroundView.backgroundColor = NSColor.gray
+        backgroundView.backgroundColor = NSColor.lightGray
         backgroundView.alphaValue = 0.0
         addSubview(backgroundView)
 
+        
         bezelView.layer?.cornerRadius = 5.0
-        bezelView.backgroundColor = NSColor.purple
+        bezelView.state = .active
+        bezelView.blendingMode = .withinWindow
+        bezelView.wantsLayer = true
+        bezelView.layer?.backgroundColor = NSColor.black.cgColor
         addSubview(bezelView)
         
         label.textColor = defaultColor
