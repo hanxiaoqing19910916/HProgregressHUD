@@ -1,0 +1,22 @@
+{
+  "name": "HProgressHUD",
+  "version": "0.1.0",
+  "summary": "HProgressHUD",
+  "description": "HProgressHUD is an Mac Os drop-in class that displays a translucent HUD with an indicator and/or labels while work is being done in a background thread.",
+  "homepage": "https://github.com/190658047@qq.com/HProgressHUD",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "190658047@qq.com": "190658047@qq.com"
+  },
+  "source": {
+    "git": "",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "osx": "10.10"
+  },
+  "source_files": "HProgressHUD/Classes/**/*"
+}

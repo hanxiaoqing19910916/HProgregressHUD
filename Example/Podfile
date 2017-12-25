@@ -1,11 +1,10 @@
-use_frameworks!
+platform :osx,‘10.10’
 
-target 'HProgregressHUD_Example' do
-  pod 'HProgregressHUD', :path => '../'
+target 'HProgressHUD-Example' do
 
-  target 'HProgregressHUD_Tests' do
-    inherit! :search_paths
+  use_frameworks!
 
-    
-  end
+  pod 'HProgressHUD', :path => '../'
+
+
 end
