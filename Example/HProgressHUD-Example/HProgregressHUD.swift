@@ -49,7 +49,7 @@ open class HProgregressHUD: NSView {
     
     open var contentColor: NSColor = NSColor.white
     
-    open let backgroundView: HBackgroundView = HBackgroundView()
+    open let backgroundView = HBackgroundView()
     
     open let bezelView = NSVisualEffectView()
     
@@ -114,12 +114,17 @@ extension HProgregressHUD {
         backgroundView.alphaValue = 0.0
         addSubview(backgroundView)
 
-        
         bezelView.layer?.cornerRadius = 5.0
         bezelView.state = .active
         bezelView.blendingMode = .withinWindow
-        bezelView.wantsLayer = true
-        bezelView.layer?.backgroundColor = NSColor.black.cgColor
+        bezelView.alphaValue = 0.8
+        
+        let materialView = HBackgroundView()
+        materialView.autoresizingMask = [.width, .height]
+        materialView.backgroundColor = NSColor.black
+        materialView.alphaValue = 0.5
+        bezelView.addSubview(materialView)
+        
         addSubview(bezelView)
         
         label.textColor = defaultColor
