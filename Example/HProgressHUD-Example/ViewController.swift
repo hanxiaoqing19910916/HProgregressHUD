@@ -31,7 +31,7 @@ class ViewController: NSViewController {
         })
         let hud = HProgregressHUD.showHUDAddedTo(view:(NSApp.keyWindow?.contentView)!, animated: true)
         hud.label.stringValue = "HUD loading title"
-        hud.detailsLabel.stringValue = "Parsing data title"
+//        hud.detailsLabel.stringValue = "这会是一个很长的文字, 虽然也不知道说什么，但是请记住，这是一段很长的文字这会是一个很长的文字, 虽然也不知道说什么，但是请记住，这是一段很长的文字这会是一个很长的文字, 虽然也不知道说什么，但是请记住，这是一段很长的文字这会是一个很长的文字, 虽然也不知道说什么，但是请记住，这是一段很长的文字这会是一个很长的文字"
     }
 }
 

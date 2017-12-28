@@ -1,7 +1,7 @@
 import Cocoa
 
 fileprivate let HDefaultPadding: CGFloat = 4.0;
-fileprivate let HDefaultLabelFontSize: CGFloat = 16.0;
+fileprivate let HDefaultLabelFontSize: CGFloat = 15.0;
 fileprivate let HDefaultDetailsLabelFontSize: CGFloat = 12.0;
 
 
@@ -35,7 +35,7 @@ open class HProgregressHUD: NSView {
     
     open func showAnimated(_: Bool)  {
         alphaValue = 1.0
-        backgroundView.alphaValue = 0.1
+        backgroundView.alphaValue = 0.4
     }
     
     open func hideAnimated(_: Bool)  {
@@ -110,30 +110,31 @@ extension HProgregressHUD {
         
         //backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
         backgroundView.autoresizingMask = [.width, .height]
-        backgroundView.backgroundColor = NSColor.lightGray
+        backgroundView.backgroundColor = NSColor.gray
         backgroundView.alphaValue = 0.0
         addSubview(backgroundView)
 
-        bezelView.layer?.cornerRadius = 5.0
-        bezelView.state = .active
-        bezelView.blendingMode = .withinWindow
-        bezelView.alphaValue = 0.8
-        
         let materialView = HBackgroundView()
         materialView.autoresizingMask = [.width, .height]
         materialView.backgroundColor = NSColor.black
-        materialView.alphaValue = 0.5
-        bezelView.addSubview(materialView)
-        
-        addSubview(bezelView)
+        materialView.alphaValue = 0.7
         
         label.textColor = defaultColor
         label.font = NSFont.boldSystemFont(ofSize: HDefaultLabelFontSize)
-        bezelView.addSubview(label)
+        materialView.addSubview(label)
         
         detailsLabel.textColor = defaultColor
         detailsLabel.font = NSFont.boldSystemFont(ofSize: HDefaultDetailsLabelFontSize)
-        bezelView.addSubview(detailsLabel)
+        detailsLabel.alignment = .left
+        materialView.addSubview(detailsLabel)
+        
+        bezelView.layer?.cornerRadius = 5.0
+        bezelView.state = .active
+        bezelView.blendingMode = .withinWindow
+        bezelView.alphaValue = 0.7
+        bezelView.addSubview(materialView)
+        
+        addSubview(bezelView)
     }
     
     
@@ -146,20 +147,57 @@ extension HProgregressHUD {
         
         frame = (superview?.bounds)!
         backgroundView.frame = bounds
-
         
-        label.frame = CGRect(x: 0, y: 10, width: 100, height: 20)
-        detailsLabel.frame =  CGRect(x: 0, y: 40, width: 100, height: 20)
+        let verticalMargin: CGFloat = 15.0
+        let horizontalMargin: CGFloat = 15.0
+        let limitMinWidth: CGFloat = 200
+        
+        label.left = 0.0
+        label.top = verticalMargin
+        label.width = limitMinWidth
+        label.height = 20.0
         
         
-        bezelView.frame = CGRect(x: 0, y: 0, width: 100, height: 80)
+        detailsLabel.top = label.bottom + verticalMargin
+        let detailStringWidth = (detailsLabel.stringValue as NSString ).size(withAttributes: [.font: detailsLabel.font]).width
+        if detailStringWidth < limitMinWidth {
+            detailsLabel.left = (limitMinWidth - detailStringWidth) * 0.5
+            detailsLabel.width = detailStringWidth
+            detailsLabel.height = 20.0
+        } else {
+            detailsLabel.left = horizontalMargin
+            detailsLabel.width = limitMinWidth - detailsLabel.left * 2
+            detailsLabel.height = heightFor(string: detailsLabel.stringValue, font: detailsLabel.font!, width: detailsLabel.width) + 8
+        }
+     
+        bezelView.width = limitMinWidth
+        bezelView.height = detailsLabel.bottom + verticalMargin
+        
+        if detailsLabel.stringValue.count == 0 || detailsLabel.isHidden  {
+             bezelView.height = label.bottom + verticalMargin
+        }
+        
+        // make the whole content view center
         bezelView.makeCenter()
+        
     }
     
     
     
-
-    
+    func heightFor(string: String, font: NSFont, width: CGFloat) -> CGFloat {
+        let textStorage = NSTextStorage(string: string)
+        let textContainer = NSTextContainer(containerSize: CGSize(width: width, height: CGFloat(MAXFLOAT)))
+        
+        let layoutManager = NSLayoutManager()
+        layoutManager.addTextContainer(textContainer)
+        
+        textStorage.addLayoutManager(layoutManager)
+        textStorage.addAttributes([.font: font], range: NSRange(location: 0, length: textStorage.length))
+        textContainer.lineFragmentPadding = 0.0
+        
+        layoutManager.glyphRange(for: textContainer)
+        return layoutManager.usedRect(for: textContainer).size.height 
+    }
     
     
 }
@@ -179,7 +217,64 @@ fileprivate extension NSView {
         }
         self.setFrameOrigin(NSMakePoint(x, y))
     }
+    fileprivate var left: CGFloat {
+        get {
+            return self.frame.origin.x
+        }
+        set(newLeft) {
+            var frame = self.frame
+            frame.origin.x = newLeft
+            self.frame = frame
+        }
+    }
     
+    fileprivate var top:CGFloat {
+        get {
+            return self.frame.origin.y
+        }
+        
+        set(newTop) {
+            var frame = self.frame
+            frame.origin.y = newTop
+            self.frame = frame
+        }
+    }
+    
+    fileprivate var width:CGFloat {
+        get {
+            return self.frame.size.width
+        }
+        
+        set(newWidth) {
+            var frame = self.frame
+            frame.size.width = newWidth
+            self.frame = frame
+        }
+    }
+    
+    fileprivate var height:CGFloat {
+        get {
+            return self.frame.size.height
+        }
+        
+        set(newHeight) {
+            var frame = self.frame
+            frame.size.height = newHeight
+            self.frame = frame
+        }
+    }
+    
+    fileprivate var right:CGFloat {
+        get {
+            return self.left + self.width
+        }
+    }
+    
+    fileprivate var bottom:CGFloat {
+        get {
+            return self.top + self.height
+        }
+    }
 }
 
 
