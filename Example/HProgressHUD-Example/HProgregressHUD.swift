@@ -24,7 +24,7 @@ open class HProgregressHUD: NSView {
     }
     
     open static func HUDFor(view: NSView) -> HProgregressHUD? {
-        for view in  view.subviews.reversed() {
+        for view in view.subviews.reversed() {
             if view is HProgregressHUD {
                 return view as? HProgregressHUD
             }
@@ -39,15 +39,15 @@ open class HProgregressHUD: NSView {
     }
     
     open func hideAnimated(_: Bool)  {
-        
+        alphaValue = 0.0
+        removeFromSuperview()
     }
     
     open func hideAnimated(_: Bool, afterDelay: Double)  {
         
     }
     
-    
-    open var contentColor: NSColor = NSColor.white
+    open var contentColor: NSColor = .white
     
     open let backgroundView = HBackgroundView()
     
@@ -55,17 +55,10 @@ open class HProgregressHUD: NSView {
     
     
     open let label: NSTextField = createLabel()
-    
     open let detailsLabel: NSTextField = createLabel()
 
     
-    
     fileprivate func commonInit() {
-        //        _animationType = MBProgressHUDAnimationFade;
-        //        _mode = MBProgressHUDModeIndeterminate;
-        //        _margin = 20.0f;
-        //        _opacity = 1.f;
-        //        _defaultMotionEffectsEnabled = YES;
         alphaValue = 0.0
         wantsLayer = true
         layer?.backgroundColor = NSColor.clear.cgColor
@@ -108,7 +101,6 @@ extension HProgregressHUD {
     fileprivate func setupViews() {
         let defaultColor = contentColor
         
-        //backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
         backgroundView.autoresizingMask = [.width, .height]
         backgroundView.backgroundColor = NSColor.gray
         backgroundView.alphaValue = 0.0
@@ -159,7 +151,7 @@ extension HProgregressHUD {
         
         
         detailsLabel.top = label.bottom + verticalMargin
-        let detailStringWidth = (detailsLabel.stringValue as NSString ).size(withAttributes: [.font: detailsLabel.font]).width
+        let detailStringWidth = (detailsLabel.stringValue as NSString).size(withAttributes: [.font: detailsLabel.font]).width
         if detailStringWidth < limitMinWidth {
             detailsLabel.left = (limitMinWidth - detailStringWidth) * 0.5
             detailsLabel.width = detailStringWidth
@@ -179,10 +171,7 @@ extension HProgregressHUD {
         
         // make the whole content view center
         bezelView.makeCenter()
-        
     }
-    
-    
     
     func heightFor(string: String, font: NSFont, width: CGFloat) -> CGFloat {
         let textStorage = NSTextStorage(string: string)
@@ -199,7 +188,7 @@ extension HProgregressHUD {
         return layoutManager.usedRect(for: textContainer).size.height 
     }
     
-    
+    open override func mouseDown(with event: NSEvent) {}
 }
 
 
