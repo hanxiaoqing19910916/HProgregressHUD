@@ -41,6 +41,7 @@ open class HProgregressHUD: NSView {
     open func hideAnimated(_: Bool)  {
         alphaValue = 0.0
         removeFromSuperview()
+       // NSEvent.removeMonitor(obser)
     }
     
     open func hideAnimated(_: Bool, afterDelay: Double)  {
@@ -56,8 +57,9 @@ open class HProgregressHUD: NSView {
     
     open let label: NSTextField = createLabel()
     open let detailsLabel: NSTextField = createLabel()
+  
+    var obser: NSObject? = nil
 
-    
     fileprivate func commonInit() {
         alphaValue = 0.0
         wantsLayer = true
@@ -65,6 +67,20 @@ open class HProgregressHUD: NSView {
         
         setupViews()
         updateIndicators()
+        
+        // 全局监听鼠标进入view事件 （NSEventMaskMouseEntered），在回调block里面：调用本身hitTest得到当前鼠标所在view，如果没有trackingAreas，就返回nil，丢弃这个事件，不让下面的view触发MouseEntered
+        
+        // 注意一定要调用本身的hitTest去找当前触发的view，其实判断self.trackingAreas.count也可以，但是不靠谱，如果view
+        // 某些区域也有trackingAreas，就失效了
+        let envet = NSEvent.addLocalMonitorForEvents(matching: .mouseEntered) { (ev) -> NSEvent? in
+            let view = self.hitTest(ev.locationInWindow)
+            print("hitTest \(view.debugDescription)")
+            if view?.trackingAreas.count == 0  {
+                return nil
+            }
+            return ev
+        }
+        obser = envet as? NSObject
     }
     
     public convenience init(with view: NSView) {
@@ -81,6 +97,10 @@ open class HProgregressHUD: NSView {
     }
     open override var isFlipped: Bool {
         return true
+    }
+    
+    deinit {
+        
     }
 }
 
@@ -188,7 +208,11 @@ extension HProgregressHUD {
         return layoutManager.usedRect(for: textContainer).size.height 
     }
     
-    open override func mouseDown(with event: NSEvent) {}
+    open override func mouseDown(with event: NSEvent) {
+        hideAnimated(true)
+    }
+    
+
 }
 
 

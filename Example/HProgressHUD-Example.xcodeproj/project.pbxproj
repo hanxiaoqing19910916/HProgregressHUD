@@ -12,6 +12,7 @@
 		8A70CE5D1FF0D5CB0016EFD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A70CE5C1FF0D5CB0016EFD4 /* Assets.xcassets */; };
 		8A70CE601FF0D5CB0016EFD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A70CE5E1FF0D5CB0016EFD4 /* Main.storyboard */; };
 		8A70CE691FF0D6E80016EFD4 /* HProgregressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70CE681FF0D6E80016EFD4 /* HProgregressHUD.swift */; };
+		8A73F03E2043F62100ABDC67 /* TrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A73F03D2043F62100ABDC67 /* TrackingView.swift */; };
 		AF1BAD327AFEB05391D06AFA /* Pods_HProgressHUD_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCC08B1EBD20788043D8DCC /* Pods_HProgressHUD_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		8A70CE611FF0D5CB0016EFD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A70CE621FF0D5CB0016EFD4 /* HProgressHUD_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HProgressHUD_Example.entitlements; sourceTree = "<group>"; };
 		8A70CE681FF0D6E80016EFD4 /* HProgregressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HProgregressHUD.swift; sourceTree = "<group>"; };
+		8A73F03D2043F62100ABDC67 /* TrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingView.swift; sourceTree = "<group>"; };
 		CDCC08B1EBD20788043D8DCC /* Pods_HProgressHUD_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HProgressHUD_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 				8A70CE5E1FF0D5CB0016EFD4 /* Main.storyboard */,
 				8A70CE611FF0D5CB0016EFD4 /* Info.plist */,
 				8A70CE621FF0D5CB0016EFD4 /* HProgressHUD_Example.entitlements */,
+				8A73F03D2043F62100ABDC67 /* TrackingView.swift */,
 			);
 			path = "HProgressHUD-Example";
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				8A70CE5B1FF0D5CB0016EFD4 /* ViewController.swift in Sources */,
 				8A70CE591FF0D5CB0016EFD4 /* AppDelegate.swift in Sources */,
 				8A70CE691FF0D6E80016EFD4 /* HProgregressHUD.swift in Sources */,
+				8A73F03E2043F62100ABDC67 /* TrackingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

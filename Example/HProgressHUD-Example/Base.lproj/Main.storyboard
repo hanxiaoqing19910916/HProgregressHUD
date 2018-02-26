@@ -732,6 +732,10 @@
                                     <action selector="end:" target="XfG-lQ-9wD" id="aGf-YA-1Nh"/>
                                 </connections>
                             </button>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60U-Fv-3Kw" customClass="TrackingView" customModule="HProgressHUD_Example" customModuleProvider="target">
+                                <rect key="frame" x="151" y="25" width="163" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </customView>
                         </subviews>
                     </view>
                 </viewController>
